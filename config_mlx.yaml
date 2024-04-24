@@ -1,0 +1,12 @@
+address: 10.87.64.31:50055
+namespace: "mlx"
+counters:
+- labels:
+    "device": "mlx5_0"
+  paths:
+  - "/sys/class/infiniband/mlx5_0/ports/1/hw_counters"
+  - "/sys/class/infiniband/mlx5_0/ports/1/counters"
+  rate_keys:
+  - "port_rcv_data"
+  - "port_xmit_data"
+interval: 1000

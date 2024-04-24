@@ -1,0 +1,7 @@
+[workspace]
+members = [
+    "client",
+    "server",
+    "jtimon-rs",
+]
+resolver = "2"

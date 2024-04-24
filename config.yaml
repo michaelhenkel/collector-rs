@@ -1,0 +1,10 @@
+address: 10.87.64.31:50055
+labels:
+  "host": "host1"
+  "namespace": "rxe"
+counters:
+- labels:
+    "device": "rxe_0"
+  paths:
+  - "/sys/class/infiniband/rxe_0/ports/1/hw_counters"
+interval: 1000
