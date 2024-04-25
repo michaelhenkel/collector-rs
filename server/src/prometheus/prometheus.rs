@@ -102,19 +102,6 @@ impl Prometheus{
                     }
                 },
                 WebServerCommand::SendMetrics(metrics) => {
-                    if metrics.namespace() != "mlx"{
-                        if let Some(counter_name) = metrics.labels.get("counter_name"){
-                            if let Some(bps) = metrics.metrics.get("__junos__firewall___state__counter__bytes_per_sec"){
-                                if *
-                                
-                                
-                                bps > 0 {
-                                    info!("counter_name: {}, bps: {}", counter_name, bps);
-                                }
-                            }
-                        }
-                        //info!("Forwarding metrics: {:#?}", metrics);
-                    }
                     let mut vals = Vec::new();
                     let mut sorted_list = metrics.labels.iter().collect::<Vec<_>>();
                     sorted_list.sort_by(|a, b| a.0.cmp(b.0));
@@ -165,7 +152,6 @@ fn setup_metrics(metrics: CollectorMetrics) -> HashMap<String, GaugeVec> {
     // sort the hashmap metrics.labels by key
     let mut sorted_list = metrics.labels.iter().collect::<Vec<_>>();
     sorted_list.sort_by(|a, b| a.0.cmp(b.0));
-
 
     for (label_key,_) in sorted_list {
         vals.push(label_key.clone());
