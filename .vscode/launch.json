@@ -1,0 +1,125 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'collector-client'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=collector-client",
+                    "--package=collector-client"
+                ],
+                "filter": {
+                    "name": "collector-client",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'collector-client'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=collector-client",
+                    "--package=collector-client"
+                ],
+                "filter": {
+                    "name": "collector-client",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'collector-server'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=collector-server",
+                    "--package=collector-server"
+                ],
+                "filter": {
+                    "name": "collector-server",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'collector-server'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=collector-server",
+                    "--package=collector-server"
+                ],
+                "filter": {
+                    "name": "collector-server",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'jtimon-rs'",
+            "env": {
+                "RUST_LOG": "info"
+            },
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=jtimon-rs",
+                    "--package=jtimon-rs"
+                ],
+                "filter": {
+                    "name": "jtimon-rs",
+                    "kind": "bin"
+                }
+            },
+            "args": [
+                "--config",
+                "jtimon-rs/config.yaml"
+            ],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'jtimon-rs'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=jtimon-rs",
+                    "--package=jtimon-rs"
+                ],
+                "filter": {
+                    "name": "jtimon-rs",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}

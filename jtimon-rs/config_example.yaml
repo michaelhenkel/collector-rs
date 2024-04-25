@@ -1,0 +1,33 @@
+collector:
+  address: 127.0.0.1:50055
+devices:
+- address: 127.0.0.1:50052
+  namespace: "qfx"
+  user: USER
+  password: PWD
+  cid: cid
+  tls:
+    cert_file: 
+    key_file:
+    ca_file:
+    server_name:
+  paths:
+  - path: /junos/system/linecard/firewall/
+    freq: 2000
+  - path: /junos/system/linecard/qmon-sw/
+    freq: 2000
+- address: 127.0.0.1:50052
+  namespace: "qfx"
+  user: USER
+  password: PWD
+  cid: cid
+  tls:
+    cert_file:
+    key_file:
+    ca_file:
+    server_name:
+  paths:
+  - path: /junos/system/linecard/firewall/
+    freq: 2000
+  - path: /junos/system/linecard/qmon-sw/
+    freq: 2000

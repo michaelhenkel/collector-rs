@@ -2,7 +2,7 @@ collector:
   address: 10.87.64.31:50055
 devices:
 - address: 10.84.192.15:50052
-  namespace: "qfx1"
+  namespace: "qfx"
   user: mhenkel
   password: kadalh12
   cid: cid
@@ -14,10 +14,10 @@ devices:
   paths:
   - path: /junos/system/linecard/firewall/
     freq: 2000
-  #- path: /junos/system/linecard/qmon-sw/
-  #  freq: 2000
+  - path: /junos/system/linecard/qmon-sw/
+    freq: 2000
 - address: 10.84.192.16:50052
-  namespace: "qfx2"
+  namespace: "qfx"
   user: mhenkel
   password: kadalh12
   cid: cid
@@ -29,9 +29,5 @@ devices:
   paths:
   - path: /junos/system/linecard/firewall/
     freq: 2000
-    label_regexps:
-      byte_counter: "state/counter\\[name='([^']*)'\\]/byte"
-    rate_keys:
-      byte_rate: "state/counter\\[name='([^']*)'\\]/byte"
-  #- path: /junos/system/linecard/qmon-sw/
-  #  freq: 2000
+  - path: /junos/system/linecard/qmon-sw/
+    freq: 2000

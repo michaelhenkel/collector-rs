@@ -1,5 +1,3 @@
-use std::{collections::HashMap, env, future};
-
 use clap::Parser;
 use grpc::grpc::Grpc;
 use collector_client::collector_client::CollectorClient;
@@ -29,10 +27,8 @@ struct Device{
     address: String,
     user: String,
     password: String,
-    cid: String,
     tls: Tls,
     paths: Vec<Path>,
-    labels: Option<HashMap<String, String>>,
     namespace: String,
 }
 
@@ -53,8 +49,6 @@ pub struct Tls{
 pub struct Path{
     path: String,
     freq: u32,
-    label_regexps: Option<HashMap<String,String>>,
-    rate_keys: Option<HashMap<String,String>>,
 }
 
 #[tokio::main]
@@ -76,7 +70,7 @@ async fn main() {
         let grpc = Grpc::new(device.address.clone(), device.tls, device.user.clone(), device.password.clone(), col_client_client.clone()).await.unwrap();
         let mut client = grpc.client();
         let jh = tokio::spawn(async move{
-            if let Err(e) = client.subscribe_and_receive(device.paths, device.user, device.password, device.namespace, device.address).await{
+            if let Err(e) = client.subscribe_and_receive(device.paths, device.user, device.password, device.namespace).await{
                 log::error!("Failed to subscribe: {:?}", e);
             };
         });

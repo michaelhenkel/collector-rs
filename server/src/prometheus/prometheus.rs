@@ -103,12 +103,26 @@ impl Prometheus{
                 },
                 WebServerCommand::SendMetrics(metrics) => {
                     if metrics.namespace() != "mlx"{
-                        info!("Forwarding metrics: {:?}", metrics);
+                        if let Some(counter_name) = metrics.labels.get("counter_name"){
+                            if let Some(bps) = metrics.metrics.get("__junos__firewall___state__counter__bytes_per_sec"){
+                                if *
+                                
+                                
+                                bps > 0 {
+                                    info!("counter_name: {}, bps: {}", counter_name, bps);
+                                }
+                            }
+                        }
+                        //info!("Forwarding metrics: {:#?}", metrics);
                     }
                     let mut vals = Vec::new();
-                    for label_value in metrics.labels.values() {
+                    let mut sorted_list = metrics.labels.iter().collect::<Vec<_>>();
+                    sorted_list.sort_by(|a, b| a.0.cmp(b.0));
+
+                    for (_, label_value) in sorted_list {
                         vals.push(label_value.clone());
                     }
+
                     let vals: Vec<&str> = vals.iter().map(|s| s.as_str()).collect();
                     let slice_vals = vals.as_slice();
                     let mut not_found = false;
@@ -146,10 +160,17 @@ impl Prometheus{
 
 fn setup_metrics(metrics: CollectorMetrics) -> HashMap<String, GaugeVec> {
     let mut gauge_map = HashMap::new();
-    let mut vals = Vec::new();
-    for label_value in metrics.labels.keys() {
-        vals.push(label_value.clone());
+    let mut vals = Vec::with_capacity(metrics.labels.len());
+
+    // sort the hashmap metrics.labels by key
+    let mut sorted_list = metrics.labels.iter().collect::<Vec<_>>();
+    sorted_list.sort_by(|a, b| a.0.cmp(b.0));
+
+
+    for (label_key,_) in sorted_list {
+        vals.push(label_key.clone());
     }
+
     let vals: Vec<&str> = vals.iter().map(|s| s.as_str()).collect();
     let slice_vals = vals.as_slice();
     for k in metrics.metrics.keys(){
